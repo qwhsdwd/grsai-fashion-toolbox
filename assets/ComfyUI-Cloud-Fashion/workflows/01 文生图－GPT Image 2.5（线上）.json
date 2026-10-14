@@ -1,0 +1,209 @@
+{
+  "id": "0c63ee15-fa79-4110-bf0a-2cd8eb9f0da4",
+  "revision": 2,
+  "last_node_id": 3,
+  "last_link_id": 1,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "CloudFashionTextToImage",
+      "pos": [
+        0,
+        0
+      ],
+      "size": [
+        570,
+        430
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "prompt",
+          "name": "prompt",
+          "type": "STRING",
+          "widget": {
+            "name": "prompt"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "size",
+          "name": "size",
+          "type": "COMBO",
+          "widget": {
+            "name": "size"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "full_outfit",
+          "name": "full_outfit",
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "full_outfit"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "task_name",
+          "name": "task_name",
+          "type": "STRING",
+          "widget": {
+            "name": "task_name"
+          },
+          "link": null
+        },
+        {
+          "name": "重新生成批次",
+          "type": "INT",
+          "shape": 7,
+          "widget": {
+            "name": "重新生成批次"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "生成图片",
+          "name": "生成图片",
+          "type": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            1
+          ]
+        },
+        {
+          "localized_name": "任务状态",
+          "name": "任务状态",
+          "type": "STRING",
+          "slot_index": 1,
+          "links": []
+        }
+      ],
+      "title": "① 文生图 · gpt-image-2.5 · 线上",
+      "properties": {
+        "Node name for S&R": "CloudFashionTextToImage"
+      },
+      "widgets_values": [
+        "写实成年女性服装模特，灰色简洁走廊，自然微笑，穿黑白千鸟格针织上衣和棕色A字短裙，衣服材质和皮肤自然。",
+        "1024x1024",
+        true,
+        "自动",
+        0
+      ],
+      "widgets_values_named": {
+        "prompt": "写实成年女性服装模特，灰色简洁走廊，自然微笑，穿黑白千鸟格针织上衣和棕色A字短裙，衣服材质和皮肤自然。",
+        "size": "1024x1024",
+        "full_outfit": true,
+        "task_name": "自动",
+        "重新生成批次": 0
+      }
+    },
+    {
+      "id": 2,
+      "type": "SaveImage",
+      "pos": [
+        650,
+        0
+      ],
+      "size": [
+        500,
+        610
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "图片",
+          "name": "images",
+          "type": "IMAGE",
+          "link": 1
+        },
+        {
+          "localized_name": "文件名前缀",
+          "name": "filename_prefix",
+          "type": "STRING",
+          "widget": {
+            "name": "filename_prefix"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "images",
+          "name": "images",
+          "type": "IMAGE",
+          "links": null
+        }
+      ],
+      "title": "② 查看并保存图片",
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "线上工具箱/01 文生图/result"
+      ],
+      "widgets_values_named": {
+        "filename_prefix": "线上工具箱/01 文生图/result"
+      }
+    },
+    {
+      "id": 3,
+      "type": "MarkdownNote",
+      "pos": [
+        0,
+        490
+      ],
+      "size": [
+        570,
+        520
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "使用说明 · 线上模型",
+      "properties": {
+        "Node name for S&R": "MarkdownNote"
+      },
+      "widgets_values": [
+        "分享版：先上传自己的图片，再运行。此包不含人物或服装照片。\n\n# 01 线上文生图\n\n使用 gpt-image-2.5，由现有 GrsAI 中转站生成。\n\n1. 填写 prompt（人物、服装、场景等）。\n2. size 选择图片尺寸；full_outfit 开启后强调完整露脸和整套服装。非人物画面可关闭。\n3. 任务编号自动生成：换素材或参数会自动新建；相同内容同批次复用或续查。想用同样素材重新出一版，把「重新生成批次」加1。\n4. 点击运行，图片保存到输出目录的「线上工具箱/01 文生图」。\n\n模型全部在线。本机仅上传、解码和保存文件；Key 从本机配置读取，不写入工作流。\n\n节点与接口参数已检查；图片接口已完成真实生成验证；当前自动任务功能使用无收费回归检查。"
+      ],
+      "widgets_values_named": {
+        "text": "分享版：先上传自己的图片，再运行。此包不含人物或服装照片。\n\n# 01 线上文生图\n\n使用 gpt-image-2.5，由现有 GrsAI 中转站生成。\n\n1. 填写 prompt（人物、服装、场景等）。\n2. size 选择图片尺寸；full_outfit 开启后强调完整露脸和整套服装。非人物画面可关闭。\n3. 任务编号自动生成：换素材或参数会自动新建；相同内容同批次复用或续查。想用同样素材重新出一版，把「重新生成批次」加1。\n4. 点击运行，图片保存到输出目录的「线上工具箱/01 文生图」。\n\n模型全部在线。本机仅上传、解码和保存文件；Key 从本机配置读取，不写入工作流。\n\n节点与接口参数已检查；图片接口已完成真实生成验证；当前自动任务功能使用无收费回归检查。"
+      },
+      "color": "#432",
+      "bgcolor": "#653"
+    }
+  ],
+  "links": [
+    [
+      1,
+      1,
+      0,
+      2,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "online_models_only": true,
+    "provider": "GrsAI",
+    "ds": {
+      "scale": 0.8712000000000004,
+      "offset": [
+        936.7924875827998,
+        313.557947497087
+      ]
+    }
+  },
+  "version": 0.4
+}

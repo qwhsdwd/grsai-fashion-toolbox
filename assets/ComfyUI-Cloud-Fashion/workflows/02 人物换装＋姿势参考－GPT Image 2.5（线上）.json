@@ -1,0 +1,331 @@
+{
+  "id": "36dbd062-7a91-4c5b-a291-5b006faa39b3",
+  "revision": 2,
+  "last_node_id": 7,
+  "last_link_id": 3,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "LoadImage",
+      "title": "① 人物图 · 唯一身份来源",
+      "pos": [
+        0,
+        0
+      ],
+      "size": [
+        350,
+        460
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            1
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": [],
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "",
+        "image"
+      ]
+    },
+    {
+      "id": 2,
+      "type": "LoadImage",
+      "title": "② 衣服图 · 平铺或穿在别人身上均可",
+      "pos": [
+        400,
+        0
+      ],
+      "size": [
+        350,
+        460
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            2
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": [],
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "",
+        "image"
+      ]
+    },
+    {
+      "id": 3,
+      "type": "CloudFashionOutfit",
+      "title": "③ 人物换装 · gpt-image-2.5 · 线上",
+      "pos": [
+        840,
+        0
+      ],
+      "size": [
+        550,
+        460
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "person",
+          "type": "IMAGE",
+          "link": 1
+        },
+        {
+          "name": "garment",
+          "type": "IMAGE",
+          "link": 2
+        },
+        {
+          "name": "bottom",
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "name": "pose",
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "name": "重新生成批次",
+          "type": "INT",
+          "shape": 7,
+          "widget": {
+            "name": "重新生成批次"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "换装图片",
+          "type": "IMAGE",
+          "links": [
+            3
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "任务状态",
+          "type": "STRING",
+          "links": [],
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CloudFashionOutfit"
+      },
+      "widgets_values": [
+        "将人物原上衣替换为衣服图中的款式，衣服花纹、纽扣、蝴蝶结和缎带尽量忠实。",
+        "941x1672",
+        true,
+        "自动",
+        0
+      ]
+    },
+    {
+      "id": 4,
+      "type": "SaveImage",
+      "title": "④ 查看并保存换装图",
+      "pos": [
+        1470,
+        0
+      ],
+      "size": [
+        500,
+        650
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 3
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "线上工具箱/02 人物换装/result"
+      ]
+    },
+    {
+      "id": 5,
+      "type": "LoadImage",
+      "title": "可选：独立裙子或裤子 · 上传后连到 bottom",
+      "pos": [
+        0,
+        550
+      ],
+      "size": [
+        350,
+        460
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [],
+          "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": [],
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "",
+        "image"
+      ]
+    },
+    {
+      "id": 6,
+      "type": "LoadImage",
+      "title": "可选：模仿这张图的姿势 · 上传后连到 pose",
+      "pos": [
+        400,
+        550
+      ],
+      "size": [
+        350,
+        460
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [],
+          "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": [],
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "",
+        "image"
+      ]
+    },
+    {
+      "id": 7,
+      "type": "MarkdownNote",
+      "title": "使用说明 · 线上模型",
+      "pos": [
+        840,
+        550
+      ],
+      "size": [
+        750,
+        590
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "MarkdownNote"
+      },
+      "widgets_values": [
+        "分享版：先上传自己的图片，再运行。此包不含人物或服装照片。\n\n# 02 线上人物换装\n\n必选：人物图 person ＋衣服图 garment。\n衣服可以是平铺、挂拍，或别人穿着的衣服。人物身份只取自 person，衣服图里的人脸和背景不复制。\n\n可选：\n- 再给裙子或裤子：把左下方图片的 IMAGE 输出连到 bottom。此时 garment 用于上衣，bottom 用于下装。\n- 模仿某张图片的姿势：把姿势图的 IMAGE 输出连到 pose。只参考肢体姿态，身份仍来自人物图。\n\n默认仅接人物和衣服。补充要求填 instructions；完整露脸和衣裙建议开启 full_outfit。\n\n任务编号自动生成：换素材或参数会自动新建；相同内容同批次复用或续查。想用同样素材重新出一版，把「重新生成批次」加1。先确认换装图效果，再把成品放入第03个流程生成视频。\n\n输出：「线上工具箱/02 人物换装」。图片接口已完成真实生成验证；当前自动任务功能使用无收费回归检查。"
+      ]
+    }
+  ],
+  "links": [
+    [
+      1,
+      1,
+      0,
+      3,
+      0,
+      "IMAGE"
+    ],
+    [
+      2,
+      2,
+      0,
+      3,
+      1,
+      "IMAGE"
+    ],
+    [
+      3,
+      3,
+      0,
+      4,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "online_models_only": true,
+    "provider": "GrsAI",
+    "ds": {
+      "scale": 0.72,
+      "offset": [
+        50,
+        50
+      ]
+    }
+  },
+  "version": 0.4
+}

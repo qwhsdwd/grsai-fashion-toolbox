@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+.DS_Store
+.pytest_cache/
+.venv/
+config.local.json
+credentials.json
+.env
+.env.*
+dist/
+output/
+outputs/

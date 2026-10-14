@@ -1,0 +1,248 @@
+{
+  "id": "c9afa5ee-6115-43a4-9c41-ee1c599b8477",
+  "revision": 2,
+  "last_node_id": 5,
+  "last_link_id": 2,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "LoadImage",
+      "title": "① 已确认的换装图 · 完整露脸和衣裙",
+      "pos": [
+        0,
+        0
+      ],
+      "size": [
+        350,
+        460
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            1
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": [],
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "",
+        "image"
+      ]
+    },
+    {
+      "id": 2,
+      "type": "CloudFashionImageToVideo",
+      "title": "② 图片生视频 · H3 · 线上",
+      "pos": [
+        440,
+        0
+      ],
+      "size": [
+        620,
+        590
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 1
+        },
+        {
+          "name": "pose",
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "name": "重新生成批次",
+          "type": "INT",
+          "shape": 7,
+          "widget": {
+            "name": "重新生成批次"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "生成视频",
+          "type": "VIDEO",
+          "links": [
+            2
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "任务状态",
+          "type": "STRING",
+          "links": [],
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CloudFashionImageToVideo"
+      },
+      "widgets_values": [
+        "服装模特展示：正面站姿，轻侧身扶胯，轻展裙摆，回正微笑；动作舒缓，每个造型停留，重点展示衣服。",
+        "1080p",
+        10,
+        "portrait",
+        true,
+        2026101304,
+        "fixed",
+        "自动",
+        0
+      ]
+    },
+    {
+      "id": 3,
+      "type": "SaveVideo",
+      "title": "③ 查看并保存线上视频",
+      "pos": [
+        1140,
+        0
+      ],
+      "size": [
+        500,
+        650
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "video",
+          "type": "VIDEO",
+          "link": 2
+        }
+      ],
+      "outputs": [
+        {
+          "name": "video",
+          "type": "VIDEO",
+          "links": [],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SaveVideo"
+      },
+      "widgets_values": [
+        "线上工具箱/03 图片生视频/result",
+        "mp4",
+        "auto"
+      ]
+    },
+    {
+      "id": 4,
+      "type": "LoadImage",
+      "title": "可选：造型参考图 · 上传后连到 pose",
+      "pos": [
+        0,
+        550
+      ],
+      "size": [
+        350,
+        460
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [],
+          "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": [],
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "",
+        "image"
+      ]
+    },
+    {
+      "id": 5,
+      "type": "MarkdownNote",
+      "title": "使用说明 · 线上模型",
+      "pos": [
+        440,
+        680
+      ],
+      "size": [
+        850,
+        670
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "MarkdownNote"
+      },
+      "widgets_values": [
+        "分享版：先上传自己的图片，再运行。此包不含人物或服装照片。\n\n# 03 线上图片生成视频\n\n使用现有 GrsAI minimax-h3 接口。\n\n1. 上传已确认的换装图。\n2. keywords 填动作、造型、展示节奏或分段描述；留空时使用基本模特展示。\n3. 可选：姿势参考图连到 pose，让模特自然过渡到指定造型。\n4. resolution 选480p / 768p / 1080p；duration 为秒数。1080p最多10秒，其他档最多15秒。\n5. full_outfit 开启后强调完整露脸、上衣和整个裙摆全程入镜；模型仍需人工检查。\n6. 任务编号自动生成：换素材或参数会自动新建；相同内容同批次复用或续查。想用同样素材重新出一版，把「重新生成批次」加1。\n\n默认是10秒1080P档。此档此前实测返回1056×1920；实际尺寸和时长以返回文件为准。10秒样片从提交到查到成功约14分41秒。\n\n输出：「线上工具箱/03 图片生视频」。\n参考视频输入暂不接入；当前工作流不会读取或上传视频。H3接口已实测，新封装已做无收费检查。"
+      ]
+    }
+  ],
+  "links": [
+    [
+      1,
+      1,
+      0,
+      2,
+      0,
+      "IMAGE"
+    ],
+    [
+      2,
+      2,
+      0,
+      3,
+      0,
+      "VIDEO"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "online_models_only": true,
+    "provider": "GrsAI",
+    "ds": {
+      "scale": 0.72,
+      "offset": [
+        50,
+        50
+      ]
+    }
+  },
+  "version": 0.4
+}

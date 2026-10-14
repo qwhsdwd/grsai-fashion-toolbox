@@ -1,0 +1,4 @@
+interface:
+  display_name: "GrsAI 线上服装工具箱"
+  short_description: "协助安装配置 GrsAI 文生图、人物换装和视频工作流，自动管理任务"
+  default_prompt: "请用 $grsai-fashion-toolbox 协助我安装线上服装工具箱，配置我自己的 GrsAI Key，并导入三条工作流。"
